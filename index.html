@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private IP and Location</title>
+</head>
+<body>
+    <h1>Your Private Numerical IP and Location</h1>
+    <p id="ip"></p>
+    <p id="location"></p>
+
+    <script>
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ip').innerText = `Your Private IP: ${data.ip}`;
+                fetch(`https://ipapi.co/${data.ip}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('location').innerText = `Your Location: ${data.city}, ${data.region}, ${data.country}`;
+                    });
+            });
+    </script>
+</body>
+</html>
