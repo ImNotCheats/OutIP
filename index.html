@@ -10,18 +10,22 @@
     <h1>Your Private Numerical IP and Location</h1>
     <p id="ip"></p>
     <p id="location"></p>
+    <p id="device"></p>
 
     <script>
         fetch('https://api.ipify.org?format=json')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('ip').innerText = `Your Private IP: ${data.ip}`;
-                fetch(`https://ipapi.co/${data.ip}/json/`)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('location').innerText = `Your Location: ${data.city}, ${data.region}, ${data.country}`;
-                    });
+                document.getElementById('ipAddress').innerText = `Your IP Address: ${data.ip}`;
             });
+
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('location').innerText = `Your Location: ${data.city}, ${data.region}, ${data.country_name}`;
+            });
+
+        document.getElementById('device').innerText = `Your Device: ${navigator.platform}`;
     </script>
 </body>
 </html>
